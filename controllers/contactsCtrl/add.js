@@ -4,7 +4,7 @@ const createError = require('../../helpers/createError');
 
 const add = async (req, res, next) => {
     const contact = req.body;
-    const {error} = addSchema.validate(contact)
+    const { error } = addSchema.validate(contact);
     
     if (error) {
         throw createError(400, error.message)
