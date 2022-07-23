@@ -1,11 +1,11 @@
 const createError = require('../../helpers/createError');
-const { removeContact } = require('../../models/contacts');
+const { Contact } = require('../../schemas/contacts.js');
 
 
 const getById = async (req, res, next) => {
     const { contactId } = req.params;
 
-    const result = await removeContact(contactId);
+    const result = await Contact.findByIdAndRemove({ _id: contactId });
     if (!result) {
         throw createError(404);
     }
