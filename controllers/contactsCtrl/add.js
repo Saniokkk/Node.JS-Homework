@@ -1,6 +1,6 @@
-const { addSchema } = require('../../schemas/contacts');
+const { addSchema } = require('../../models/contacts');
 const createError = require('../../helpers/createError');
-const { Contact } = require('../../schemas/contacts.js');
+const { Contact } = require('../../models/contacts.js');
 
 const add = async (req, res, next) => {
     // const { name, email, phone } = req.body;
