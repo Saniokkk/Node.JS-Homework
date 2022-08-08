@@ -1,6 +1,5 @@
 const createError = require('../../helpers/createError');
-const { updateFavoriteSchema } = require('../../schemas/contacts');
-const { Contact } = require('../../schemas/contacts.js');
+const { Contact, updateFavoriteSchema } = require('../../models/contacts');
 
 const updateStatusContact = async (req, res, next) => {
     const { contactId } = req.params;

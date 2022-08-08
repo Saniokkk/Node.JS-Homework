@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const { Schema, model } = require('mongoose');
-// const Joi = require('joi');
 
 const userSchema = new Schema({
     password: {
@@ -25,7 +24,7 @@ const userSchema = new Schema({
 
 const emailRegexp = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
 
-const singUp = Joi.object({
+const signUp = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().pattern(emailRegexp).required(),
     password: Joi.string().min(6).required()
@@ -37,7 +36,7 @@ const login = Joi.object({
 });
 
 const schemas = {
-    singUp,
+    signUp,
     login,
 }
 

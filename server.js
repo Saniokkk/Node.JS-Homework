@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("colors")
 
 const app = require('./app');
 
@@ -7,7 +8,7 @@ const {DB_HOST, PORT = 3000} = process.env;
 mongoose.connect(DB_HOST)
   .then(() => {
     app.listen(PORT)
-    console.log(`Database connection successful ${PORT}`);
+    console.log(`Database connection successful ${PORT}`.bgGreen.black);
   })
   .catch(error => {
     console.log(error.message);

@@ -1,17 +1,17 @@
 const bcrypt = require('bcryptjs');
 const createError = require('../../helpers/createError');
-const schemas = require('../../models');
-const { User } = require('../../models/user');
+// const schemas = require('../../models');
+const { User, schemas } = require('../../models/user');
 
-const singUp = async (req, res) => {
+const signUp = async (req, res) => {
     const { name, email, password } = req.body;
-
-    const { error } = schemas.singUp.validate(req.body);
+    const { error } = schemas.signUp.validate(req.body);
     if (error) {
         throw createError(400, error.message);
     }
-
+    
     const user = User.findOne({ email });
+    console.log(req.body);
     if (user) {
         throw createError(409, "Email in use");
     }
@@ -28,4 +28,4 @@ const singUp = async (req, res) => {
 
 }
 
-module.exports = singUp;
+module.exports = signUp;

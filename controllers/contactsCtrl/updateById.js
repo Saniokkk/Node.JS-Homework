@@ -1,5 +1,5 @@
 const createError = require('../../helpers/createError');
-const { Contact, addSchema } = require('../../schemas/contacts');
+const { Contact, addSchema } = require('../../models/contacts');
 
 const updateById = async (req, res, next) => {
     const { contactId } = req.params;
