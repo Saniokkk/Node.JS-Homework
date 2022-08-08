@@ -2,12 +2,18 @@ const express = require('express');
 
 const router = express.Router();
 
+const ctrlWrapper = require('../../helpers/ctrlWrapper');
+
 const ctrl = require('../../controllers/auth');
 
-router.post('/signup', ctrl.signUp);
+const checkingToken = require('../../middlewares/');
 
-router.post('/login', ctrl.login);
+router.post('/signup', ctrlWrapper(ctrl.signUp));
 
-router.post('/logout', ctrl.logout);
+router.post('/login', ctrlWrapper(ctrl.login));
+
+router.get('/current', checkingToken, ctrlWrapper(ctrl.getCurrent))
+
+router.post('/logout', checkingToken, ctrlWrapper(ctrl.logout));
 
 module.exports = router;

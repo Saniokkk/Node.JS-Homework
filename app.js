@@ -9,7 +9,6 @@ global.basedir = __dirname;
 const contactsRouter = require('./routes/api/contacts');
 const authRouter = require('./routes/api/auth');
 
-console.log(__dirname.bgYellow.black)
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
