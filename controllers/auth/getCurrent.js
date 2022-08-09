@@ -1,10 +1,10 @@
-const getCurrent = async(req, res) => {
-    const { name, email } = req.user;
-    console.log(name, email);
+const getCurrent = async (req, res) => {
+    const { subscription, email } = req.user;
+    console.log(subscription, email);
     res.json({
-        name,
         email,
+        subscription
     })
 }
 
-exports.module = getCurrent;
+module.exports = getCurrent;

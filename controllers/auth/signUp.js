@@ -25,7 +25,6 @@ const signUp = async (req, res) => {
         subscription: "starter"
         }
     })
-
 }
 
 module.exports = signUp;

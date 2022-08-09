@@ -3,7 +3,6 @@ const createError = require('../../helpers/createError');
 const { Contact } = require('../../models/contacts.js');
 
 const add = async (req, res, next) => {
-    // const { name, email, phone } = req.body;
     const contact = req.body;
     const { error } = addSchema.validate(contact);
 
@@ -16,6 +15,7 @@ const add = async (req, res, next) => {
     };
     
     const result = await Contact.create(contact);
+    console.log(result);
     res.status(201).json(result);
     
 }

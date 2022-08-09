@@ -6,7 +6,7 @@ const ctrlWrapper = require('../../helpers/ctrlWrapper');
 
 const ctrl = require('../../controllers/auth');
 
-const checkingToken = require('../../middlewares/');
+const {checkingToken} = require('../../middlewares/');
 
 router.post('/signup', ctrlWrapper(ctrl.signUp));
 

@@ -1,5 +1,5 @@
 const checkingToken = require('./checkingToken');
 
-exports.module = {
+module.exports = {
     checkingToken,
 }
