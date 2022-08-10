@@ -1,5 +1,6 @@
 const createError = require('../../helpers/createError');
-const { Contact, addSchema } = require('../../schemas/contacts');
+const { addSchema } = require('../../models/contacts');
+const Contacts = require('../../repository/Contacts');
 
 const updateById = async (req, res, next) => {
     const { contactId } = req.params;
@@ -10,7 +11,7 @@ const updateById = async (req, res, next) => {
         throw createError(404, error.message);
     }
 
-    const result = await Contact.findByIdAndUpdate({ _id: contactId }, req.body, { new: true });
+    const result = await Contacts.updateById(contactId, req.body);
     if (!result) {
         throw createError(404);
     }
