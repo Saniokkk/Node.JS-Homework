@@ -1,11 +1,11 @@
 const express = require('express');
 const ctrl = require('../../controllers/contactsCtrl');
 const ctrlWrapper = require('../../helpers/ctrlWrapper');
-const {checkingToken} = require('../../middlewares/');
+const {checkingToken, isFavorite, paginationContacts} = require('../../middlewares/');
 
 const router = express.Router()
 
-router.get('/', checkingToken, ctrlWrapper(ctrl.getAll));
+router.get('/', checkingToken, isFavorite, paginationContacts, ctrlWrapper(ctrl.getAll));
 
 router.get('/:contactId', checkingToken, ctrlWrapper(ctrl.getById));
 

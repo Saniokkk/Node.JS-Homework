@@ -18,6 +18,27 @@ class Contacts {
             console.log(error.message.red);
         }
     }
+    
+    async getFavorite(bool) {
+        try {
+            console.log(bool);
+            const result = await Contact.find({ favorite:  bool });
+            return result;
+        } catch (error) {
+            console.log(error.message.red);
+        }
+    }
+
+    async getPageContacts(page, limit) {
+        try {
+            const result = await Contact.find().skip(Number(page) === 1 ? 0 : page * limit).limit(limit);
+            return result;
+        } catch (error) {
+            console.log(error.message.red);
+        }
+    }
+
+    
 
     async getContact(contact) {
         try {
