@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const createError = require('../../helpers/createError');
-const { User, schemas } = require('../../models/user');
+const { schemas } = require('../../models/user');
+const Users = require('../../repository/Users');
+require("colors")
 
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
@@ -10,15 +12,15 @@ const signUp = async (req, res) => {
     if (error) {
         throw createError(400, error.message);
     }
-    const user = await User.findOne({ email });
-    console.log(user);
+    const user = await Users.getUser( {email} );
+    console.log("user", user);
     if (user) {
         throw createError(409, "Email in use");
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
     console.log(hashPassword)
-    const result = await User.create({ name, email, password: hashPassword });
+    const result = await Users.create({ name, email, password: hashPassword });
     res.status(201).json({
     user: {
         email: result.email,

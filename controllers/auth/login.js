@@ -1,7 +1,8 @@
 const createError = require("../../helpers/createError");
-const { User, schemas } = require("../../models/user");
+const { schemas } = require("../../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Users = require("../../repository/Users");
 
 const { SECRET_KEY } = process.env;
 
@@ -13,7 +14,7 @@ const login = async (req, res) => {
         throw createError(400, error.message);
     }
 
-    const user = await User.findOne({ email });
+    const user = await Users.getUser( {email} );
     if (!user) {
         throw createError(401, "Email or password is wrong");
     }
@@ -29,7 +30,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
     console.log(token);
-    await User.findByIdAndUpdate(user._id, {token})
+    await Users.updateById(user._id, {token})
     res.json({
         token,
         user: {
