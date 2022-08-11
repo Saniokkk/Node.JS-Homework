@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const createError = require('../../helpers/createError');
 const { schemas } = require('../../models/user');
 const Users = require('../../repository/Users');
+const gravatar = require('gravatar');
 require("colors")
 
 const signUp = async (req, res) => {
@@ -19,8 +20,9 @@ const signUp = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-    console.log(hashPassword)
-    const result = await Users.create({ name, email, password: hashPassword });
+    const avatarURL = gravatar.url(email);
+    console.log(avatarURL.green);
+    const result = await Users.create({ name, email, password: hashPassword, avatarURL });
     res.status(201).json({
     user: {
         email: result.email,

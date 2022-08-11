@@ -20,6 +20,10 @@ const userSchema = new Schema({
         type: String,
         default: null,
     },
+    avatarURL: {
+        type: String,
+        required: true,
+    }
 }, { versionKey: false , timestamps: true})
 
 const emailRegexp = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
