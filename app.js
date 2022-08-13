@@ -4,7 +4,7 @@ const cors = require('cors')
 require("dotenv").config()
 require("colors")
 
-global.basedir = __dirname;
+global.basedir = __dirname; 
 
 const contactsRouter = require('./routes/api/contacts');
 const authRouter = require('./routes/api/auth');
@@ -16,6 +16,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
+app.use(express.static("public", { extensions: ['jpg', 'jpeg', 'gif', 'png'] }))
 
 app.use('/user', authRouter)
 app.use('/api/contacts', contactsRouter)

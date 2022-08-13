@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../../middlewares/upload')
 
 const router = express.Router();
 
@@ -15,5 +16,7 @@ router.post('/login', ctrlWrapper(ctrl.login));
 router.get('/current', checkingToken, ctrlWrapper(ctrl.getCurrent))
 
 router.post('/logout', checkingToken, ctrlWrapper(ctrl.logout));
+
+router.patch('/avatars', checkingToken, upload.single('avatar'), ctrlWrapper(ctrl.setAvatar));
 
 module.exports = router;
