@@ -17,6 +17,6 @@ router.get('/current', checkingToken, ctrlWrapper(ctrl.getCurrent))
 
 router.post('/logout', checkingToken, ctrlWrapper(ctrl.logout));
 
-router.patch('/avatar', checkingToken, upload.single('avatar'), ctrlWrapper(ctrl.setAvatar));
+router.patch('/avatars', checkingToken, upload.single('avatar'), ctrlWrapper(ctrl.setAvatar));
 
 module.exports = router;

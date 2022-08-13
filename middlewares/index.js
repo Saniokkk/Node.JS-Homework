@@ -5,5 +5,5 @@ const paginationContacts = require('./paginationContacts');
 module.exports = {
     checkingToken,
     isFavorite,
-    paginationContacts
+    paginationContacts,
 }
