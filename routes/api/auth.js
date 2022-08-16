@@ -11,6 +11,10 @@ const {checkingToken} = require('../../middlewares/');
 
 router.post('/signup', ctrlWrapper(ctrl.signUp));
 
+router.get('/verify/:verificationToken', ctrlWrapper(ctrl.verifyEmail));
+
+router.get('/verify', ctrlWrapper(ctrl.resendVerifyEmail));
+
 router.post('/login', ctrlWrapper(ctrl.login));
 
 router.get('/current', checkingToken, ctrlWrapper(ctrl.getCurrent))

@@ -3,6 +3,8 @@ const createError = require('../../helpers/createError');
 const { schemas } = require('../../models/user');
 const Users = require('../../repository/Users');
 const gravatar = require('gravatar');
+const {v4: uuid } = require('uuid');
+const sendEmail = require('../../helpers/sendEmail');
 require("colors")
 
 const signUp = async (req, res) => {
@@ -21,8 +23,17 @@ const signUp = async (req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
     const avatarURL = gravatar.url(email);
-    console.log(avatarURL.green);
-    const result = await Users.create({ name, email, password: hashPassword, avatarURL });
+    const verificationToken = uuid();
+
+    const result = await Users.create({ name, email, password: hashPassword, avatarURL, verificationToken });
+
+    const mail = {
+        to: email,
+        subject: "Подтверждение регистрации на сайте",
+        html: `<a target="_blank" href="http://localhost:3000/api/auth/verify/${verificationToken}">Нажмите для подтверждения регистрации</a>`
+    }
+
+    await sendEmail(mail);
     res.status(201).json({
     user: {
         email: result.email,
