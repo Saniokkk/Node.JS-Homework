@@ -10,13 +10,12 @@ require("colors")
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
     const { error } = schemas.signUp.validate(req.body);
-    console.log(req.body);
-    console.log(error);
+
     if (error) {
         throw createError(400, error.message);
     }
-    const user = await Users.getUser( {email} );
-    console.log("user", user);
+    const user = await Users.getUser({ email });
+    
     if (user) {
         throw createError(409, "Email in use");
     }
@@ -30,7 +29,7 @@ const signUp = async (req, res) => {
     const mail = {
         to: email,
         subject: "Подтверждение регистрации на сайте",
-        html: `<a target="_blank" href="http://localhost:3000/api/auth/verify/${verificationToken}">Нажмите для подтверждения регистрации</a>`
+        html: `<a target="_blank" href="http://localhost:3000/user/verify/${verificationToken}">Нажмите для подтверждения регистрации</a>`
     }
 
     await sendEmail(mail);
